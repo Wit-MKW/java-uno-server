@@ -606,7 +606,6 @@ public class UNO_Server extends javax.swing.JFrame {
     }
     
     private class ServerConnection {
-        
         String line = null;
         BufferedReader is = null;
         PrintWriter os = null;
