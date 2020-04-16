@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -52,7 +53,12 @@ public class UNO_Server extends javax.swing.JFrame {
                     if (!desc.isEmpty()) desc(sc[players]);
                     tell(sc[players], "NewPlayer" + String.format("%1$02d%2$02d", players, maxPlayers));
                     // for example, "NewPlayer0010" would be given to player 1/10
-                    names[players] = sc[players].is.readLine();
+                    String name = sc[players].is.readLine();
+                    if (Arrays.asList(names).contains(name)) {
+                        int i = 1;
+                        while (Arrays.asList(names).contains(name + "(" + i + ")")) i++;
+                        names[players] = name + "(" + i + ")";
+                    } else names[players] = name;
                     players++;
                     jLabel2.setText(players + "/" + maxPlayers + " players have now joined.");
                     if (!isVisible()) {
