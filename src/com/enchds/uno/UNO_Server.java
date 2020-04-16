@@ -24,7 +24,6 @@ import java.util.logging.Logger;
  * @author mOSU_
  */
 public class UNO_Server extends javax.swing.JFrame {
-
     private static final long serialVersionUID = 1L;
     private ArrayList<UnoCard> deck = new ArrayList<>(108);
     private ArrayList<UnoCard> discard = new ArrayList<>(50);
@@ -263,7 +262,7 @@ public class UNO_Server extends javax.swing.JFrame {
                             tell(sc[currentPlayer], "WarningDrawTwo");
                             // A draw two card has been used on you, skipping your turn.
                             for (int i = 0; i < 2; i++) {
-                                if (deck.isEmpty()) {
+                                if (!deck.isEmpty()) {
                                     hands.get(currentPlayer).add(deck.get(0));
                                     deck.remove(0);
                                 }
