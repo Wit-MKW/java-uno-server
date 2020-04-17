@@ -534,6 +534,16 @@ public class UNO_Server extends javax.swing.JFrame {
         sc.os.flush();
     }
     
+    private void tellHand(int player, ServerConnection sc) {
+        String print = "MSG:HAND:";
+            for (int i = 0; i < hands.get(player).size(); i++) {
+                print += hands.get(player).get(i);
+                if (i != hands.get(player).size() - 1) print += "-";
+            }
+            sc.os.println(print);
+            sc.os.flush();
+    }
+    
     private void desc(ServerConnection sc) {
         sc.os.println("MSG:DESC:" + desc);
         sc.os.flush();
@@ -692,9 +702,7 @@ public class UNO_Server extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (players >= 1) {
-            gameReady = true;
-        }
+        gameReady = (players >= 1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -702,7 +710,7 @@ public class UNO_Server extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
             /* Create and display the form */
-            new UNO_Server(args.length >= 1 && args[0].equalsIgnoreCase("-cli"));
+            new UNO_Server((args.length >= 1 && args[0].equalsIgnoreCase("-cli")));
     }
     
     boolean ready = false;
